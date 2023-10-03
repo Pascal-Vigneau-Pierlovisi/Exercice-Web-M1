@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des produits</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- Stylesheet pour DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bulma.min.css">
+</head>
+
+<body>
+
+<!-- Tableau des produits -->
+<div class="section">
+    <div class="container">
+        <table id="productTable" class="table is-fullwidth">
+            <thead>
+            <tr>
+                <th>Nom du produit</th>
+                <th>Catégorie</th>
+                <th>Description</th>
+                <th>Date d'ajout</th>
+                <th>Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Exemple de lignes pour le tableau -->
+            <tr>
+                <td>Produit A</td>
+                <td>Électronique</td>
+                <td>Une description du produit A</td>
+                <td>2023-09-30</td>
+                <td>150€</td>
+            </tr>
+            <tr>
+                <td>Produit B</td>
+                <td>Vêtements</td>
+                <td>Une description du produit B</td>
+                <td>2023-08-25</td>
+                <td>45€</td>
+            </tr>
+            <tr>
+                <td>Produit A</td>
+                <td>Électronique</td>
+                <td>Une description du produit A</td>
+                <td>2023-09-30</td>
+                <td>150€</td>
+            </tr>
+            <!-- Ajoutez d'autres lignes de produits ici -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bulma.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#productTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.11.4/i18n/French.json"
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>
