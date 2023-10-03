@@ -28,7 +28,7 @@
             <a class="navbar-item" href="#">
                 Accueil
             </a>
-            <a class="navbar-item" href="#">
+            <a class="navbar-item" href="Listing.php">
                 Liste Produit
             </a>
         </div>
@@ -36,19 +36,32 @@
 </nav>
 
 <?php
+
+include_once 'fonctions.php';
+
 if (isset($_GET["id"])) {
+
+    $id = $_GET["id"];
+
+    $data = getProduit($id);
+
+    $designation = $data['designation'];
+    $categorie = $data['categorie'];
+    $prix = $data['prix'];
+
 
     ?>
 
     <div class="section">
         <div class="container">
-            <h1 class="title">Modifier un Produit</h1>
+            <h1 class="title">Ajouter un produit</h1>
 
             <form action="update.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $id ?>" >
                 <div class="field">
                     <label class="label">Nom du produit</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Entrez le nom du produit" name="productName"
+                        <input class="input" type="text" name="designation" value="<?php echo $designation ?>"
                                required>
                     </div>
                 </div>
@@ -57,37 +70,32 @@ if (isset($_GET["id"])) {
                     <label class="label">Catégories</label>
                     <div class="control">
                         <div class="select">
-                            <select name="productCategorie" required>
-                                <option value="">Sélectionnez une catégorie</option>
-                                <option value="electronique">Électronique</option>
-                                <option value="vetements">Vêtements</option>
-                                <option value="alimentaire">Alimentaire</option>
-                                <option value="livres">Livres</option>
+                            <select name="categorie" required>
+                                <?php
+                                $result = listeCategories();
+                                foreach ($result as $row) {
+                                    $idCate = $row['id_categorie'];
+                                    $designation = $row['designation'];
+                                    $selected = $idCate == $categorie ? 'selected' : '';
+                                    echo "<option value='$idCate' $selected>$designation</option>";
+
+                                } ?>
                                 <!-- Ajoutez d'autres catégories ici -->
                             </select>
                         </div>
                     </div>
                 </div>
-
-                <div class="field">
-                    <label class="label">Description</label>
-                    <div class="control">
-                        <textarea class="textarea" placeholder="Entrez la description du produit"
-                                  name="productDescription"></textarea>
-                    </div>
-                </div>
-
                 <div class="field">
                     <label class="label">Prix</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Entrez le prix du produit" name="productPrice"
-                               step="0.01" required>
+                        <input class="input" type="number" name="prix"
+                               step="0.01" value=<?php echo $prix ?> required>
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="control">
-                        <button class="button is-primary" type="submit">Modifier le Produit</button>
+                        <button class="button is-primary" type="submit">Modifier le produit</button>
                     </div>
                 </div>
             </form>
@@ -106,7 +114,7 @@ if (isset($_GET["id"])) {
                 <div class="field">
                     <label class="label">Nom du produit</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Entrez le nom du produit" name="productName"
+                        <input class="input" type="text" placeholder="Entrez le nom du produit" name="designation"
                                required>
                     </div>
                 </div>
@@ -115,30 +123,26 @@ if (isset($_GET["id"])) {
                     <label class="label">Catégories</label>
                     <div class="control">
                         <div class="select">
-                            <select name="productCategorie" required>
-                                <option value="">Sélectionnez une catégorie</option>
-                                <option value="electronique">Électronique</option>
-                                <option value="vetements">Vêtements</option>
-                                <option value="alimentaire">Alimentaire</option>
-                                <option value="livres">Livres</option>
+                            <select name="categorie" required>
+                                <?php
+                                $result = listeCategories();
+                                foreach ($result as $row) {
+                                    $id = $row['id_categorie'];
+                                    $designation = $row['designation'];
+                                    echo "
+                                    <option value=$id >$designation</option>
+				";
+
+                                } ?>
                                 <!-- Ajoutez d'autres catégories ici -->
                             </select>
                         </div>
                     </div>
                 </div>
-
-                <div class="field">
-                    <label class="label">Description</label>
-                    <div class="control">
-                        <textarea class="textarea" placeholder="Entrez la description du produit"
-                                  name="productDescription"></textarea>
-                    </div>
-                </div>
-
                 <div class="field">
                     <label class="label">Prix</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Entrez le prix du produit" name="productPrice"
+                        <input class="input" type="number" placeholder="Entrez le prix du produit" name="prix"
                                step="0.01" required>
                     </div>
                 </div>
